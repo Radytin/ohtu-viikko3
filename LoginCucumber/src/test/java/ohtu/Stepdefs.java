@@ -41,6 +41,22 @@ public class Stepdefs {
     public void command_new_user_is_selected() throws Throwable {
         inputLines.add("new");
         
+        
     
 }
+    
+    @Given("^user \"([^\"]*)\" with password \"([^\"]*)\" is created$")
+    public void user_with_password_is_created(String arg1, String arg2) throws Throwable {
+        inputLines.add("new");
+
+        inputLines.add(arg1);
+        inputLines.add(arg2);
+
+        io = new StubIO(inputLines);
+        app = new App(io, auth);
+        app.run();
+        
+        assertTrue((io.getPrints().contains("new user not registered")) || (io.getPrints().contains("new user registered")));
+    }
+
 }
